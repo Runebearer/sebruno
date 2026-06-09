@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sébastien & Bruno - Notre Mariage</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #fdfbf7;
+            --primary-color: #2c4a3e;
+            --accent-color: #d4af37;
+            --text-color: #333333;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* ── Navigation ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            background: rgba(44, 74, 62, 0.92);
+            backdrop-filter: blur(6px);
+            padding: 0;
+        }
+
+        nav a {
+            color: #f4efe6;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 18px 32px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        nav a:hover {
+            background: rgba(212, 175, 55, 0.25);
+            color: var(--accent-color);
+        }
+
+        nav a.active {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        /* ── Hero / Accueil ── */
+        #accueil {
+            min-height: 100vh;
+            background-image: url('grange des mollieres.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        #accueil::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(20, 40, 30, 0.52);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 40px 24px;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.78rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: #fff;
+            font-weight: 400;
+            letter-spacing: 3px;
+            line-height: 1.1;
+            margin-bottom: 28px;
+        }
+
+        .hero-divider {
+            width: 80px;
+            height: 2px;
+            background: var(--accent-color);
+            margin: 0 auto 28px;
+        }
+
+        .hero-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            color: #f4efe6;
+            font-style: italic;
+            font-weight: 400;
+            max-width: 520px;
+            line-height: 1.5;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 14px 36px;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .hero-cta:hover {
+            background: var(--accent-color);
+            color: #fff;
+        }
+
+        /* ── Programme section ── */
+        #programme {
+            padding-top: 80px;
+        }
+
+        .section-header {
+            text-align: center;
+            padding: 60px 20px 20px;
+            background-color: #f4efe6;
+            border-bottom: 1px solid #e2dacb;
+        }
+
+        .section-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: var(--primary-color);
+            font-weight: 400;
+            letter-spacing: 2px;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 10px;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .col-headers {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 10px;
+        }
+
+        .col-header {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            text-align: center;
+            letter-spacing: 1px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .section-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+            margin-bottom: 30px;
+        }
+
+        .directive-block {
+            background: var(--card-bg);
+            padding: 24px 28px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .directive-block h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+        }
+
+        .directive-block p, .directive-block li {
+            font-size: 0.92rem;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .directive-block ul {
+            padding-left: 18px;
+            margin-top: 6px;
+        }
+
+        .intro-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .intro-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .timeline-block {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .timeline-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .schedule-list { list-style: none; }
+
+        .schedule-item {
+            display: flex;
+            padding: 12px 0;
+            border-bottom: 1px dashed #e5e5e5;
+        }
+
+        .schedule-item:last-child { border-bottom: none; }
+
+        .time {
+            font-weight: 600;
+            color: var(--accent-color);
+            min-width: 100px;
+            flex-shrink: 0;
+        }
+
+        .event-details { flex-grow: 1; }
+        .event-details strong { color: #111; }
+
+        .ceremonie-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 0.95rem;
+        }
+
+        .ceremonie-table th, .ceremonie-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .ceremonie-table th {
+            background-color: #f4efe6;
+            color: var(--primary-color);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+        }
+
+        .ceremonie-table td:first-child {
+            font-weight: 600;
+            color: var(--accent-color);
+            width: 90px;
+        }
+
+        .illustration-img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .map-container { position: relative; margin-top: 20px; }
+        .map-container .illustration-img { margin-top: 0; }
+
+        .map-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 10px;
+            padding: 12px 16px;
+            background: #f9f6f0;
+            border-radius: 6px;
+            border: 1px solid #e2dacb;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .legend-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            display: inline-block;
+            flex-shrink: 0;
+            border: 1px solid rgba(0,0,0,0.15);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            background-color: #f4efe6;
+            margin-top: 0;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .col-headers, .section-row { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            .hero-title { font-size: 2.6rem; }
+            nav a { padding: 16px 16px; font-size: 0.7rem; letter-spacing: 1px; }
+            .schedule-item { flex-direction: column; }
+            .time { margin-bottom: 4px; }
+            .ceremonie-table th, .ceremonie-table td { padding: 8px; font-size: 0.85rem; }
+            .ceremonie-table td:first-child { width: 70px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#accueil" class="active">Accueil</a>
+        <a href="#programme">Programme</a>
+        <a href="todo.html">To-do list témoins</a>
+    </nav>
+
+    <!-- ══════════════ ACCUEIL ══════════════ -->
+    <section id="accueil">
+        <div class="hero-content">
+            <p class="hero-eyebrow">Le Mariage de</p>
+            <h1 class="hero-title">Sebruno</h1>
+            <div class="hero-divider"></div>
+            <p class="hero-tagline">L'événement de l'année !!</p>
+            <p style="margin-top:32px; font-family:'Cormorant Garamond',serif; font-size:1.3rem; color:#f4efe6; letter-spacing:3px;">
+                Save the Date ! &nbsp;·&nbsp; 25 juillet 2026
+            </p>
+            <a href="#programme" class="hero-cta">Voir le programme</a>
+        </div>
+    </section>
+
+    <!-- ══════════════ PROGRAMME ══════════════ -->
+    <section id="programme">
+        <div class="section-header">
+            <h2>Sébastien & Bruno</h2>
+            <p>Le Programme de notre Mariage</p>
+        </div>
+
+        <div class="container">
+
+            <div class="intro-section">
+                <h2>Le Déroulé de la Journée</h2>
+                <p>Nous sommes heureux de partager ces moments uniques avec vous. Voici le fil conducteur de notre journée.</p>
+            </div>
+
+            <!-- Rangée 1 : Cérémonie Civile -->
+            <div class="timeline-block">
+                <div class="timeline-title">🏛️ 13h30 - 14h30 : Cérémonie Civile</div>
+                <ul class="schedule-list">
+                    <li class="schedule-item">
+                        <div class="time">13h30</div>
+                        <div class="event-details"><strong>Arrivée à la mairie</strong><br>Rassemblement des invités et des mariés.</div>
+                    </li>
+                    <li class="schedule-item">
+                        <div class="time">14h00</div>
+                        <div class="event-details"><strong>Cérémonie civile</strong><br>À la mairie de Meulan.</div>
+                    </li>
+                    <li class="schedule-item">
+                        <div class="time">14h30</div>
+                        <div class="event-details"><strong>Fin de la cérémonie</strong><br>Félicitations et partages.</div>
+                    </li>
+                </ul>
+                <img class="illustration-img" src="mairie.png" alt="Mairie de Meulan">
+            </div>
+
+            <!-- Rangée 2 : Arrivée à La Grange -->
+            <div class="timeline-block">
+                <div class="timeline-title">🌿 14h45 - 17h00 : Arrivée à La Grange</div>
+                <ul class="schedule-list">
+                    <li class="schedule-item">
+                        <div class="time">14h45</div>
+                        <div class="event-details"><strong>Départ en cortège</strong><br>En route direction La Grange !</div>
+                    </li>
+                    <li class="schedule-item">
+                        <div class="time">16h00</div>
+                        <div class="event-details"><strong>Arrivée à La Grange</strong></div>
+                    </li>
+                    <li class="schedule-item">
+                        <div class="time">16h00 <br> 16h30</div>
+                        <div class="event-details"><strong>Pause rafraîchissement</strong><br>Pause fraîcheur, commodités et accueil des convives qui arrivent directement au domaine.</div>
+                    </li>
+                    <li class="schedule-item">
+                        <div class="time">16h30 <br> 17h00</div>
+                        <div class="event-details"><strong>Placement des invités & Cérémonie du sable</strong><br>À leur entrée, les invités s'installent et remplissent le vase au fur et à mesure.</div>
+                    </li>
+                </ul>
+                <div class="map-container">
+                    <img class="illustration-img" src="grange des mollieres1.png" alt="La Grange des Mollières">
+                    <div class="map-legend">
+                        <span class="legend-item"><span class="legend-dot" style="background:#e74c3c;"></span> Entrée</span>
+                        <span class="legend-item"><span class="legend-dot" style="background:#f48fb1;"></span> Vin d'honneur</span>
+                        <span class="legend-item"><span class="legend-dot" style="background:#2196f3;"></span> Cérémonie</span>
+                        <span class="legend-item"><span class="legend-dot" style="background:#f1c40f;"></span> Photos</span>
+                        <span class="legend-item"><span class="legend-dot" style="background:#81c784;"></span> Parking</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rangée 3 : Cérémonie Laïque -->
+            <div class="timeline-block">
+                <div class="timeline-title">🕊️ 17h00 - 17h45 : La Cérémonie Laïque</div>
+                <table class="ceremonie-table">
+                    <thead>
+                        <tr>
+                            <th>Timing</th>
+                            <th>Étape</th>
+                            <th>Détails</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>17h00</td>
+                            <td><strong>L'Introduction</strong></td>
+                            <td>Entrée des témoins, introduction générale par l'officiant(e), puis Entrée des mariés (Bruno et Sébastien).</td>
+                        </tr>
+                        <tr>
+                            <td>17h10</td>
+                            <td><strong>Les Discours</strong></td>
+                            <td>Intervention d'un témoin de Sébastien, suivie de l'intervention d'un témoin de Bruno.</td>
+                        </tr>
+                        <tr>
+                            <td>17h25</td>
+                            <td><strong>Les Rituels</strong></td>
+                            <td>Petit mot de transition &rarr; Les mariés sont invités à se lever.<br>• <em>Cérémonie du ruban</em></td>
+                        </tr>
+                        <tr>
+                            <td>17h35</td>
+                            <td><strong>L'Engagement</strong></td>
+                            <td>Échange des vœux + Petite phrase symbolique sur le fait de se choisir l'un et l'autre devant l'assistance comme témoin.</td>
+                        </tr>
+                        <tr>
+                            <td>17h40</td>
+                            <td><strong>Le Final</strong></td>
+                            <td>Plantage de la rose dans le vase &rarr; Baiser des mariés 💋</td>
+                        </tr>
+                        <tr>
+                            <td>17h45</td>
+                            <td><strong>Clôture</strong></td>
+                            <td>Invitation officielle des mariés au vin d'honneur.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <img class="illustration-img" src="laique.jpeg" alt="lieu de cérémonie">
+            </div>
+
+            <!-- Rangée 4 : Vin d'Honneur & Photos -->
+            <div class="timeline-block">
+                <div class="timeline-title">🥂 17h45 - 19h00 : Le Vin d'Honneur & Photos</div>
+                <ul class="schedule-list">
+                    <li class="schedule-item">
+                        <div class="time">17h45</div>
+                        <div class="event-details"><strong>Arrivée au vin d'honneur</strong><br>Consignes données aux invités. Pendant ce temps, Bruno et Sébastien font quelques photos de couple.</div>
+                    </li>
+                    <li class="schedule-item">
+                        <div class="time">18h00 <br> 19h00</div>
+                        <div class="event-details"><strong>Photos de groupe</strong><br>Chaque groupe est appelé l'un après l'autre pour faire sa photo avec le couple.</div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Rangée 5 : Dîner & Fête -->
+            <div class="timeline-block">
+                <div class="timeline-title">🍽️ À partir de 19h00 : Le Dîner & La Fête</div>
+                <ul class="schedule-list">
+                    <li class="schedule-item">
+                        <div class="time">19h00</div>
+                        <div class="event-details"><strong>Début du dîner</strong><br>Installation en salle.</div>
+                    </li>
+                    <li class="schedule-item">
+                        <div class="time">19h15</div>
+                        <div class="event-details"><strong>Discours des mariés</strong><br>Mot de remerciement à l'assistance.</div>
+                    </li>
+                    <li class="schedule-item">
+                        <div class="time">19h30</div>
+                        <div class="event-details"><strong>Service du Plat</strong></div>
+                    </li>
+                    <li class="schedule-item">
+                        <div class="time">20h15</div>
+                        <div class="event-details"><strong>1ère intervention</strong><br>Par les témoins ou les proches.</div>
+                    </li>
+                    <li class="schedule-item">
+                        <div class="time">20h30</div>
+                        <div class="event-details"><strong>Service du Fromage</strong></div>
+                    </li>
+                    <li class="schedule-item">
+                        <div class="time">21h00</div>
+                        <div class="event-details"><strong>2e intervention</strong></div>
+                    </li>
+                    <li class="schedule-item">
+                        <div class="time">21h15</div>
+                        <div class="event-details"><strong>Service du Dessert</strong></div>
+                    </li>
+                    <li class="schedule-item">
+                        <div class="time">21h45</div>
+                        <div class="event-details"><strong>3e intervention</strong></div>
+                    </li>
+                    <li class="schedule-item">
+                        <div class="time">22h00</div>
+                        <div class="event-details"><strong>✨ Ouverture de la piste de danse</strong><br>Début de la soirée festive jusqu'au bout de la nuit !</div>
+                    </li>
+                </ul>
+                <img class="illustration-img" src="ruban.jpg" alt="ruban en coeur">
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div>Vive les mariés !</div>
+        <div style="margin-top:16px; font-family:'Montserrat',sans-serif; font-size:0.82rem; color:#7a7366; line-height:2;">
+            <div>📅 25/07/2026</div>
+            <div>📍 Mairie : 10 Pl. Brigitte Gros, 78250 Meulan-en-Yvelines</div>
+            <div>📍 Réception : Les Molières, 78270 La Villeneuve-en-Chevrie</div>
+            <div>💬 N'hésitez pas à contacter Roland, Loïc, Victoria, Mylène ou Olivier via WhatsApp si nécessaire.</div>
+        </div>
+    </footer>
+
+    <script>
+        // Nav active state on scroll
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(s => {
+                if (window.scrollY >= s.offsetTop - 100) current = s.id;
+            });
+            navLinks.forEach(a => {
+                a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+            });
+        });
+
+        // Persist checkboxes in localStorage
+        document.querySelectorAll('.todo-item input[type="checkbox"]').forEach(cb => {
+            if (localStorage.getItem(cb.id) === 'true') cb.checked = true;
+            cb.addEventListener('change', () => localStorage.setItem(cb.id, cb.checked));
+        });
+    </script>
+
+</body>
+</html>

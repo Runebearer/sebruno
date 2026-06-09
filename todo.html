@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do list Témoins — Sebruno</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #fdfbf7;
+            --primary-color: #2c4a3e;
+            --accent-color: #d4af37;
+            --text-color: #333333;
+            --card-bg: #ffffff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            background: rgba(44, 74, 62, 0.92);
+            backdrop-filter: blur(6px);
+        }
+
+        nav a {
+            color: #f4efe6;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 18px 32px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        nav a:hover { background: rgba(212,175,55,0.25); color: var(--accent-color); }
+        nav a.active { color: var(--accent-color); border-bottom: 2px solid var(--accent-color); }
+
+        .page-header {
+            padding: 100px 20px 30px;
+            text-align: center;
+            background-color: #f4efe6;
+            border-bottom: 1px solid #e2dacb;
+        }
+
+        .page-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: var(--primary-color);
+            font-weight: 400;
+            letter-spacing: 2px;
+        }
+
+        .page-header p {
+            font-size: 1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 10px;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+
+        /* ── Directives ── */
+        .directive-block {
+            background: var(--card-bg);
+            padding: 24px 28px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .directive-block h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+        }
+
+        .directive-block p, .directive-block li {
+            font-size: 0.92rem;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .directive-block ul { padding-left: 18px; margin-top: 6px; }
+
+        /* ── Séparateur ── */
+        .section-divider {
+            border-top: 2px solid var(--accent-color);
+            margin: 40px 0 30px;
+            position: relative;
+        }
+
+        .section-divider span {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-color);
+            padding: 0 16px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            white-space: nowrap;
+        }
+
+        /* ── Todo ── */
+        .todo-section {
+            background: var(--card-bg);
+            padding: 28px 32px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .todo-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            margin-bottom: 16px;
+        }
+
+        .todo-list { list-style: none; }
+
+        .todo-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px dashed #e5e5e5;
+            font-size: 0.92rem;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .todo-item:last-child { border-bottom: none; }
+
+        .todo-item input[type="checkbox"] {
+            margin-top: 3px;
+            accent-color: var(--primary-color);
+            width: 16px; height: 16px;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .todo-item label { cursor: pointer; }
+        .todo-item input:checked + label { text-decoration: line-through; color: #aaa; }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            background-color: #f4efe6;
+        }
+
+        @media (max-width: 600px) {
+            nav a { padding: 16px 14px; font-size: 0.7rem; letter-spacing: 1px; }
+        }
+
+        /* ── Écran de verrouillage ── */
+        #lock-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            background: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        #lock-screen h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--primary-color);
+            letter-spacing: 2px;
+        }
+
+        #lock-screen p {
+            font-size: 0.82rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #888;
+        }
+
+        #lock-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+
+        #lock-input {
+            padding: 12px 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            text-align: center;
+            width: 260px;
+            color: var(--text-color);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        #lock-input:focus { border-color: var(--primary-color); }
+
+        #lock-btn {
+            padding: 12px 36px;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        #lock-btn:hover { background: #1e3329; }
+
+        #lock-error {
+            color: #c0392b;
+            font-size: 0.82rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Écran de verrouillage -->
+    <div id="lock-screen">
+        <h2>Espace Témoins</h2>
+        <p>Accès réservé</p>
+        <div id="lock-form">
+            <input type="password" id="lock-input" placeholder="Code d'accès" autocomplete="off">
+            <button id="lock-btn" onclick="checkCode()">Entrer</button>
+            <span id="lock-error">Code incorrect, réessaie !</span>
+        </div>
+    </div>
+
+    <nav>
+        <a href="app.html#accueil">Accueil</a>
+        <a href="app.html#programme">Programme</a>
+        <a href="todo.html" class="active">To-do list témoins</a>
+    </nav>
+
+    <div class="page-header">
+        <h1>To-do list Témoins</h1>
+        <p>Directives & tâches à préparer</p>
+    </div>
+
+    <div class="container">
+
+        <!-- Directives : Cérémonie Civile -->
+        <div class="directive-block">
+            <h3>🏛️ Cérémonie Civile</h3>
+            <ul>
+                <li><strong>13h30 — Arrivée des témoins</strong><br>Arriver à 13h30 pour accueillir les premiers invités. 1 témoin vérifie la salle pendant que les autres distribuent les bulles aux invités.</li>
+                <li><strong>Cérémonie civile — Placement</strong><br>Placement libre, sauf le 1er rang réservé : conjoints des témoins et famille (parents de Seb + Véro + Alex).</li>
+                <li><strong>Fin de cérémonie — Sortie</strong><br>Les mariés sortiront en dernier. Tout le monde sort et l'un d'entre nous ira prévenir les mariés quand tout le monde est sur les marches.</li>
+            </ul>
+        </div>
+
+        <!-- Directives : Arrivée à La Grange -->
+        <div class="directive-block">
+            <h3>🌿 Arrivée à La Grange</h3>
+            <ul>
+                <li><strong>Départ en cortège</strong><br>Loïc + 1 témoin partent dès la sortie de la mairie. À l'arrivée à la Grange : mise en place des bracelets pour les arrivants + vase et sables sur une petite table à l'entrée. Les invités ont jusqu'à 16h45 pour participer à la cérémonie du sable.</li>
+                <li><strong>Placement des invités</strong><br>1er rang réservé pour la famille et conjoints des témoins, puis placement libre. Les mariés arriveront par les côtés de la gloriette. Mylène et/ou Olivier prendront le vase rempli pour le placer au centre de la cérémonie.</li>
+            </ul>
+            <p style="margin-top:12px; font-size:0.88rem; background:#fff8e1; border-left:3px solid #f1c40f; padding:8px 12px; border-radius:4px;">
+                <strong>⚠️ Solution de repli (météo)</strong> — Le bâtiment dans le dos de la cérémonie (en bas sur la photo) peut accueillir la cérémonie en cas de mauvais temps.
+            </p>
+        </div>
+
+        <!-- Directives : Cérémonie Laïque -->
+        <div class="directive-block">
+            <h3>🕊️ Cérémonie Laïque</h3>
+            <ul>
+                <li><strong>L'Introduction</strong><br>Prise de parole de bienvenue (Loïc), puis lancement de la musique pour l'entrée des mariés — Seb au bras de sa maman, Bruno avec Victoria et Romain — qui s'avancent avec leur rose à la main. Ils s'assoient écartés l'un de l'autre.</li>
+                <li><strong>Les Discours</strong><br>Roland prend la parole pour son discours, suivi du discours de Victoria.</li>
+                <li><strong>Les Rituels</strong><br>Prise de parole (Loïc) pour l'explication des rituels. Les mariés se lèvent et s'approchent l'un vers l'autre et tendent une de leur main. Rituel du ruban en premier : Mylène et Olivier prennent le ruban et l'accrochent au bras gauche des mariés.<br><em>Petite phrase de transition.</em></li>
+                <li><strong>L'Engagement</strong><br>Les mariés échangent leurs vœux l'un pour l'autre.<br><em>Petite phrase de transition pour expliquer le sable dans le vase.</em></li>
+                <li><strong>Le Final</strong><br>Les mariés plantent symboliquement leur rose dans le vase de sable et s'embrassent devant la foule en délire !</li>
+                <li><strong>Clôture</strong><br>Les invités sont priés de se déplacer vers la terrasse pour le vin d'honneur. Petite explication des bracelets pour les photos.</li>
+            </ul>
+        </div>
+
+        <!-- Directives : Vin d'Honneur & Photos -->
+        <div class="directive-block">
+            <h3>🥂 Vin d'Honneur & Photos</h3>
+            <ul>
+                <li><strong>Arrivée au vin d'honneur</strong><br>Loïc reste avec la photographe et prévient les témoins quand un groupe est appelé pour les photos. Quelques minutes laissées au préalable pour les photos de couple en solo.</li>
+            </ul>
+        </div>
+
+        <!-- Directives : Dîner & Fête -->
+        <div class="directive-block">
+            <h3>🍽️ Dîner & Fête</h3>
+            <ul>
+                <li><strong>Début du dîner</strong><br>Tout le monde aide au placement, chacun guide les personnes qu'il/elle connaît.</li>
+                <li><strong>Discours des mariés</strong><br>Sebruno prennent la parole pour remercier les invités de leur présence dans cette journée. Séquence émotion !</li>
+                <li><strong>1ère intervention</strong><br>Projection de quelques moments choisis des meilleures photos de nos mariés — on termine sur la demande.</li>
+                <li><strong>2e intervention</strong><br>Le groupe des Pyrzamis est en charge de l'animation !</li>
+                <li><strong>3e intervention</strong><br>Les dernières personnes souhaitant prendre la parole sont appelées. On enchaîne avec l'ouverture du bal par les mariés.</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <footer>
+        <div>Vive les mariés !</div>
+        <div style="margin-top:16px; font-family:'Montserrat',sans-serif; font-size:0.82rem; color:#7a7366; line-height:2;">
+            <div>📅 25/07/2026</div>
+            <div>📍 Mairie : 10 Pl. Brigitte Gros, 78250 Meulan-en-Yvelines</div>
+            <div>📍 Réception : Les Molières, 78270 La Villeneuve-en-Chevrie</div>
+            <div>💬 N'hésitez pas à contacter Roland, Loïc, Victoria, Mylène ou Olivier via WhatsApp si nécessaire.</div>
+        </div>
+    </footer>
+
+    <script>
+        const CODE = 'sebrunosontamoureux';
+
+        function checkCode() {
+            const val = document.getElementById('lock-input').value;
+            if (val === CODE) {
+                sessionStorage.setItem('temoins_auth', '1');
+                document.getElementById('lock-screen').style.display = 'none';
+            } else {
+                document.getElementById('lock-error').style.display = 'block';
+                document.getElementById('lock-input').value = '';
+            }
+        }
+
+        document.getElementById('lock-input').addEventListener('keydown', e => {
+            if (e.key === 'Enter') checkCode();
+        });
+
+        if (sessionStorage.getItem('temoins_auth') === '1') {
+            document.getElementById('lock-screen').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
