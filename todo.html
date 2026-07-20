@@ -15,6 +15,12 @@
             --accent-color: #d4af37;
             --text-color: #333333;
             --card-bg: #ffffff;
+
+            --loic: #7b4fa3;
+            --roland: #2e8b57;
+            --mylene: #d6537a;
+            --olivier: #3b7dd8;
+            --victoria: #e08a1e;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -80,6 +86,57 @@
             margin: 0 auto;
             padding: 40px 20px 80px;
         }
+
+        /* ── Filtre intervenants ── */
+        .person-filter {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px 20px 0;
+            background-color: #f4efe6;
+        }
+
+        .filter-btn {
+            --btn-color: var(--primary-color);
+            border: 2px solid var(--btn-color);
+            background: #fff;
+            color: var(--btn-color);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            padding: 8px 18px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, transform 0.15s;
+        }
+
+        .filter-btn:hover { transform: translateY(-1px); }
+
+        .filter-btn.active {
+            background: var(--btn-color);
+            color: #fff;
+        }
+
+        [data-person] { transition: opacity 0.3s, filter 0.3s, color 0.3s; }
+
+        .dimmed { opacity: 0.28; filter: grayscale(70%); }
+
+        .hl-loic::marker { color: var(--loic); }
+        .hl-roland::marker { color: var(--roland); }
+        .hl-mylene::marker { color: var(--mylene); }
+        .hl-olivier::marker { color: var(--olivier); }
+        .hl-victoria::marker { color: var(--victoria); }
+
+        /* ── Noms des témoins dans le texte ── */
+        .name { transition: color 0.2s, font-weight 0.2s; }
+
+        body.active-loic .name-loic { color: var(--loic); font-weight: 700; }
+        body.active-roland .name-roland { color: var(--roland); font-weight: 700; }
+        body.active-mylene .name-mylene { color: var(--mylene); font-weight: 700; }
+        body.active-olivier .name-olivier { color: var(--olivier); font-weight: 700; }
+        body.active-victoria .name-victoria { color: var(--victoria); font-weight: 700; }
 
         /* ── Directives ── */
         .directive-block {
@@ -279,15 +336,24 @@
         <p>Directives & tâches à préparer</p>
     </div>
 
+    <div class="person-filter">
+        <button class="filter-btn active" data-filter="all">Tous</button>
+        <button class="filter-btn" data-filter="loic" style="--btn-color: var(--loic)">Loïc</button>
+        <button class="filter-btn" data-filter="roland" style="--btn-color: var(--roland)">Roland</button>
+        <button class="filter-btn" data-filter="mylene" style="--btn-color: var(--mylene)">Mylène</button>
+        <button class="filter-btn" data-filter="olivier" style="--btn-color: var(--olivier)">Olivier</button>
+        <button class="filter-btn" data-filter="victoria" style="--btn-color: var(--victoria)">Victoria</button>
+    </div>
+
     <div class="container">
 
         <!-- Directives : Cérémonie Civile -->
         <div class="directive-block">
             <h3>🏛️ Cérémonie Civile</h3>
             <ul>
-                <li><strong>13h30 — Arrivée des témoins</strong><br>Arriver à 13h30 pour accueillir les premiers invités. 1 témoin vérifie la salle pendant que les autres distribuent les bulles aux invités.</li>
-                <li><strong>Cérémonie civile — Placement</strong><br>Placement libre, sauf le 1er rang réservé : conjoints des témoins et famille (parents de Seb + Véro + Alex).</li>
-                <li><strong>Fin de cérémonie — Sortie</strong><br>Les mariés sortiront en dernier. Tout le monde sort et l'un d'entre nous ira prévenir les mariés quand tout le monde est sur les marches.</li>
+                <li data-person="olivier mylene victoria roland loic"><strong>13h30 — Arrivée des témoins</strong><br>Arriver à 13h30 pour accueillir les premiers invités. <span class="name name-olivier" data-name="olivier">Olivier</span> / <span class="name name-mylene" data-name="mylene">Mylène</span> vérifie(nt) la salle + test enceinte. <span class="name name-victoria" data-name="victoria">Victoria</span>, <span class="name name-roland" data-name="roland">Roland</span> et <span class="name name-loic" data-name="loic">Loïc</span> distribuent les bulles aux invités.</li>
+                <li data-person="loic"><strong>Cérémonie civile — Placement</strong><br>Placement libre, sauf le 1er rang réservé : <span class="name name-loic" data-name="loic">Loïc</span> dirigent les conjoints des témoins et famille (parents de Seb + Véro + Alex).</li>
+                <li data-person="all"><strong>Fin de cérémonie — Sortie</strong><br>Les mariés sortiront en dernier. Tout le monde sort et l'un d'entre nous ira prévenir les mariés quand tout le monde est sur les marches.</li>
             </ul>
         </div>
 
@@ -295,10 +361,10 @@
         <div class="directive-block">
             <h3>🌿 Arrivée à La Grange</h3>
             <ul>
-                <li><strong>Départ en cortège</strong><br>Loïc + 1 témoin partent dès la sortie de la mairie. À l'arrivée à la Grange : mise en place des bracelets pour les arrivants + vase et sables sur une petite table à l'entrée. Les invités ont jusqu'à 16h45 pour participer à la cérémonie du sable.</li>
-                <li><strong>Placement des invités</strong><br>1er rang réservé pour la famille et conjoints des témoins, puis placement libre. Les mariés arriveront par les côtés de la gloriette. Mylène et/ou Olivier prendront le vase rempli pour le placer au centre de la cérémonie.</li>
+                <li data-person="loic victoria"><strong>Départ pour la Grange :</strong><br><span class="name name-loic" data-name="loic">Loïc</span> + <span class="name name-victoria" data-name="victoria">Victoria</span> partent dès la sortie de la mairie. À l'arrivée à la Grange : mise en place des bracelets pour les arrivants. Chaque personne donne son prénom, les bracelets sont rangés dans l'ordre alphabétique dans un classeur. Les invités ont jusqu'à 16h45 pour participer à la cérémonie du sable.</li>
+                <li data-person="olivier mylene roland"><strong>Placement des invités :</strong><br><span class="name name-olivier" data-name="olivier">Olivier</span> et <span class="name name-mylene" data-name="mylene">Mylène</span> se placeront à l'entrée de la zone cérémonielle avec le vase et les seaux de sable. Chaque invité qui passe devant eux verse du sable.<br><span class="name name-roland" data-name="roland">Roland</span> s'occupe du placement : 1er rang réservé pour la famille et conjoints des témoins, puis placement libre.<br><br>Les mariés arriveront par les côtés de la gloriette. <span class="name name-mylene" data-name="mylene">Mylène</span> et/ou <span class="name name-olivier" data-name="olivier">Olivier</span> prendront le vase rempli pour le placer au centre de la cérémonie.</li>
             </ul>
-            <p style="margin-top:12px; font-size:0.88rem; background:#fff8e1; border-left:3px solid #f1c40f; padding:8px 12px; border-radius:4px;">
+            <p data-person="all" style="margin-top:12px; font-size:0.88rem; background:#fff8e1; border-left:3px solid #f1c40f; padding:8px 12px; border-radius:4px;">
                 <strong>⚠️ Solution de repli (météo)</strong> — Le bâtiment dans le dos de la cérémonie (en bas sur la photo) peut accueillir la cérémonie en cas de mauvais temps.
             </p>
         </div>
@@ -307,12 +373,11 @@
         <div class="directive-block">
             <h3>🕊️ Cérémonie Laïque</h3>
             <ul>
-                <li><strong>L'Introduction</strong><br>Prise de parole de bienvenue (Loïc), puis lancement de la musique pour l'entrée des mariés — Seb au bras de sa maman, Bruno avec Victoria et Romain — qui s'avancent avec leur rose à la main. Ils s'assoient écartés l'un de l'autre.</li>
-                <li><strong>Les Discours</strong><br>Roland prend la parole pour son discours, suivi du discours de Victoria.</li>
-                <li><strong>Les Rituels</strong><br>Prise de parole (Loïc) pour l'explication des rituels. Les mariés se lèvent et s'approchent l'un vers l'autre et tendent une de leur main. Rituel du ruban en premier : Mylène et Olivier prennent le ruban et l'accrochent au bras gauche des mariés.<br><em>Petite phrase de transition.</em></li>
-                <li><strong>L'Engagement</strong><br>Les mariés échangent leurs vœux l'un pour l'autre.<br><em>Petite phrase de transition pour expliquer le sable dans le vase.</em></li>
-                <li><strong>Le Final</strong><br>Les mariés plantent symboliquement leur rose dans le vase de sable et s'embrassent devant la foule en délire !</li>
-                <li><strong>Clôture</strong><br>Les invités sont priés de se déplacer vers la terrasse pour le vin d'honneur. Petite explication des bracelets pour les photos.</li>
+                <li data-person="loic victoria"><strong>L'Introduction</strong><br>Prise de parole de bienvenue (<span class="name name-loic" data-name="loic">Loïc</span>), puis le DJ lance la musique pour l'entrée des témoins et garçons d'honneur. Introduction (<span class="name name-loic" data-name="loic">Loïc</span>) des mariés et entrée sur leur musique — Seb au bras de sa maman, Bruno avec <span class="name name-victoria" data-name="victoria">Victoria</span> et Romain — qui s'avancent avec leur rose à la main. Ils s'assoient écartés l'un de l'autre.</li>
+                <li data-person="roland victoria"><strong>Les Discours :</strong><br><span class="name name-roland" data-name="roland">Roland</span> prend la parole pour son discours, suivi des discours de <span class="name name-victoria" data-name="victoria">Victoria</span> et de Thierry.</li>
+                <li data-person="loic mylene olivier"><strong>Les Rituels</strong><br>Prise de parole (<span class="name name-loic" data-name="loic">Loïc</span>) pour l'explication des rituels. Les mariés se lèvent et s'approchent l'un vers l'autre et tendent une de leur main. Explication du rituel du sable. Seb et Bruno plantent leur rose dans le vase. Explication du rituel du Ruban (<span class="name name-loic" data-name="loic">Loïc</span>). <span class="name name-mylene" data-name="mylene">Mylène</span> et <span class="name name-olivier" data-name="olivier">Olivier</span> prennent le ruban et l'accrochent au bras gauche des mariés. (voir comment le nouer à la répétition)<br><em>Petite phrase de transition. (<span class="name name-loic" data-name="loic">Loïc</span>)</em></li>
+                <li data-person="all"><strong>L'Engagement :</strong><br>Les mariés échangent leurs vœux l'un pour l'autre.</li>
+                <li data-person="all"><strong>Le Final :</strong><br>Les mariés s'embrassent, les invités sont priés de se déplacer vers la terrasse pour le vin d'honneur. Petite explication des bracelets pour les photos.</li>
             </ul>
         </div>
 
@@ -320,7 +385,7 @@
         <div class="directive-block">
             <h3>🥂 Vin d'Honneur & Photos</h3>
             <ul>
-                <li><strong>Arrivée au vin d'honneur</strong><br>Loïc reste avec la photographe et prévient les témoins quand un groupe est appelé pour les photos (18h00 - 19h30). À 19h30, les mariés s'éclipsent pour les photos de couple jusqu'à 20h00.</li>
+                <li data-person="all"><strong>Arrivée au vin d'honneur</strong><br><span class="name name-loic" data-name="loic">Loïc</span> reste avec la photographe et prévient les témoins (Tous) quand un groupe est appelé pour les photos (18h00 - 19h30). À 19h30, les mariés s'éclipsent pour les photos de couple jusqu'à 20h00.</li>
             </ul>
         </div>
 
@@ -328,11 +393,12 @@
         <div class="directive-block">
             <h3>🍽️ Dîner & Fête</h3>
             <ul>
-                <li><strong>Début du dîner</strong><br>Tout le monde aide au placement, chacun guide les personnes qu'il/elle connaît.</li>
-                <li><strong>Discours des mariés</strong><br>Sebruno prennent la parole pour remercier les invités de leur présence dans cette journée. Séquence émotion !</li>
-                <li><strong>1ère intervention</strong><br>Projection de quelques moments choisis des meilleures photos de nos mariés — on termine sur la demande.</li>
-                <li><strong>2e intervention</strong><br>Le groupe des Pyrzamis est en charge de l'animation !</li>
-                <li><strong>3e intervention</strong><br>Les dernières personnes souhaitant prendre la parole sont appelées. On enchaîne avec l'ouverture du bal par les mariés.</li>
+                <li data-person="all"><strong>Début du dîner</strong><br>Tout le monde aide au placement, chacun guide les personnes qu'il/elle connaît. (voir plan de table)</li>
+                <li data-person="all"><strong>Discours des mariés</strong><br>Sebruno prennent la parole pour remercier les invités de leur présence dans cette journée. Séquence émotion !</li>
+                <li data-person="victoria mylene"><strong>1ère intervention (<span class="name name-victoria" data-name="victoria">Victoria</span> / <span class="name name-mylene" data-name="mylene">Mylène</span>)</strong><br>Projection de quelques moments choisis des meilleures photos de nos mariés, on termine sur la demande.</li>
+                <li data-person="roland"><strong>2e intervention</strong><br>Le groupe des Pyrzamis est en charge de l'animation ! (<span class="name name-roland" data-name="roland">Roland</span>)</li>
+                <li data-person="loic"><strong>3e intervention</strong><br>Les dernières personnes souhaitant prendre la parole sont appelées. (<span class="name name-loic" data-name="loic">Loïc</span>)</li>
+                <li data-person="all">On enchaîne avec l'ouverture du bal par les mariés.</li>
             </ul>
         </div>
 
@@ -369,6 +435,33 @@
         if (sessionStorage.getItem('temoins_auth') === '1') {
             document.getElementById('lock-screen').style.display = 'none';
         }
+
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const personItems = document.querySelectorAll('[data-person]');
+        const allPersons = ['loic', 'roland', 'mylene', 'olivier', 'victoria'];
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+
+                document.body.classList.remove(...allPersons.map(p => 'active-' + p));
+                if (filter !== 'all') document.body.classList.add('active-' + filter);
+
+                personItems.forEach(item => {
+                    const persons = item.dataset.person.split(' ');
+                    const concerned = filter === 'all' || persons.includes('all') || persons.includes(filter);
+                    item.classList.toggle('dimmed', !concerned);
+
+                    allPersons.forEach(p => item.classList.remove('hl-' + p));
+                    if (filter !== 'all' && persons.includes(filter)) {
+                        item.classList.add('hl-' + filter);
+                    }
+                });
+            });
+        });
     </script>
 
 </body>
