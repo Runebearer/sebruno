@@ -87,6 +87,35 @@
             padding: 40px 20px 80px;
         }
 
+        /* ── Tâches personnelles ── */
+        .person-tasks {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 24px 20px 0;
+        }
+
+        .person-tasklist {
+            display: none;
+            background: var(--card-bg);
+            padding: 24px 28px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--tasklist-color, var(--primary-color));
+        }
+
+        .person-tasklist.visible { display: block; }
+
+        .person-tasklist h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--tasklist-color, var(--primary-color));
+            margin-bottom: 12px;
+        }
+
+        .person-tasklist .todo-item input[type="checkbox"] {
+            accent-color: var(--tasklist-color, var(--primary-color));
+        }
+
         /* ── Filtre intervenants ── */
         .person-filter {
             display: flex;
@@ -345,6 +374,58 @@
         <button class="filter-btn" data-filter="victoria" style="--btn-color: var(--victoria)">Victoria</button>
     </div>
 
+    <div class="person-tasks">
+        <div class="person-tasklist" data-person-list="loic" style="--tasklist-color: var(--loic)">
+            <h3>Tâches de Loïc</h3>
+            <ul class="todo-list">
+                <li class="todo-item"><input type="checkbox" id="task-loic-1"><label for="task-loic-1">Aller chercher le colis intervention</label></li>
+                <li class="todo-item"><input type="checkbox" id="task-loic-2"><label for="task-loic-2">Préparer le discours de cérémonie</label></li>
+                <li class="todo-item"><input type="checkbox" id="task-loic-3"><label for="task-loic-3">Préparer les liaisons</label></li>
+                <li class="todo-item"><input type="checkbox" id="task-loic-4"><label for="task-loic-4">Tester la liaison enceinte</label></li>
+                <li class="todo-item"><input type="checkbox" id="task-loic-5"><label for="task-loic-5">Vérifier le calage des musiques</label></li>
+                <li class="todo-item"><input type="checkbox" id="task-loic-6"><label for="task-loic-6">Préparer la table d'accueil / sable + bracelet</label></li>
+                <li class="todo-item"><input type="checkbox" id="task-loic-7"><label for="task-loic-7">Trouver nœud de ruban adapté</label></li>
+                <li class="todo-item"><input type="checkbox" id="task-loic-8"><label for="task-loic-8">Tester le sable</label></li>
+                <li class="todo-item"><input type="checkbox" id="task-loic-9"><label for="task-loic-9">Vérifier les groupes d'intervention 1</label></li>
+                <li class="todo-item"><input type="checkbox" id="task-loic-10"><label for="task-loic-10">Vérifier les groupes d'intervention 2</label></li>
+                <li class="todo-item"><input type="checkbox" id="task-loic-11"><label for="task-loic-11">Vérifier les groupes d'intervention 3</label></li>
+            </ul>
+        </div>
+        <div class="person-tasklist" data-person-list="roland" style="--tasklist-color: var(--roland)">
+            <h3>Tâches de Roland</h3>
+            <ul class="todo-list">
+                <li class="todo-item"><input type="checkbox" id="task-roland-1"><label for="task-roland-1">Écrire le discours</label></li>
+                <li class="todo-item"><input type="checkbox" id="task-roland-2"><label for="task-roland-2">Repérer les places à attribuer pour placer les invités</label></li>
+                <li class="todo-item"><input type="checkbox" id="task-roland-3"><label for="task-roland-3">Préparation de l'intervention 2</label></li>
+            </ul>
+        </div>
+        <div class="person-tasklist" data-person-list="mylene" style="--tasklist-color: var(--mylene)">
+            <h3>Tâches de Mylène</h3>
+            <ul class="todo-list">
+                <li class="todo-item"><input type="checkbox" id="task-mylene-1"><label for="task-mylene-1">Amener le cercueil</label></li>
+                <li class="todo-item"><input type="checkbox" id="task-mylene-2"><label for="task-mylene-2">Amener les broches</label></li>
+                <li class="todo-item"><input type="checkbox" id="task-mylene-3"><label for="task-mylene-3">S'entraîner pour le nœud</label></li>
+            </ul>
+        </div>
+        <div class="person-tasklist" data-person-list="olivier" style="--tasklist-color: var(--olivier)">
+            <h3>Tâches d'Olivier</h3>
+            <ul class="todo-list">
+                <li class="todo-item"><input type="checkbox" id="task-olivier-1"><label for="task-olivier-1">Amener l'enceinte</label></li>
+                <li class="todo-item"><input type="checkbox" id="task-olivier-2"><label for="task-olivier-2">Amener le sable</label></li>
+                <li class="todo-item"><input type="checkbox" id="task-olivier-3"><label for="task-olivier-3">Amener le vase</label></li>
+                <li class="todo-item"><input type="checkbox" id="task-olivier-4"><label for="task-olivier-4">S'entraîner pour le nœud de la cérémonie</label></li>
+            </ul>
+        </div>
+        <div class="person-tasklist" data-person-list="victoria" style="--tasklist-color: var(--victoria)">
+            <h3>Tâches de Victoria</h3>
+            <ul class="todo-list">
+                <li class="todo-item"><input type="checkbox" id="task-victoria-1"><label for="task-victoria-1">Appeler le DJ</label></li>
+                <li class="todo-item"><input type="checkbox" id="task-victoria-2"><label for="task-victoria-2">Écrire le discours</label></li>
+                <li class="todo-item"><input type="checkbox" id="task-victoria-3"><label for="task-victoria-3">Préparer diapo</label></li>
+            </ul>
+        </div>
+    </div>
+
     <div class="container">
 
         <!-- Directives : Cérémonie Civile -->
@@ -438,6 +519,7 @@
 
         const filterBtns = document.querySelectorAll('.filter-btn');
         const personItems = document.querySelectorAll('[data-person]');
+        const taskLists = document.querySelectorAll('.person-tasklist');
         const allPersons = ['loic', 'roland', 'mylene', 'olivier', 'victoria'];
 
         filterBtns.forEach(btn => {
@@ -450,16 +532,32 @@
                 document.body.classList.remove(...allPersons.map(p => 'active-' + p));
                 if (filter !== 'all') document.body.classList.add('active-' + filter);
 
+                taskLists.forEach(list => {
+                    list.classList.toggle('visible', filter !== 'all' && list.dataset.personList === filter);
+                });
+
                 personItems.forEach(item => {
-                    const persons = item.dataset.person.split(' ');
-                    const concerned = filter === 'all' || persons.includes('all') || persons.includes(filter);
+                    const hasName = filter !== 'all' && item.querySelector('.name-' + filter) !== null;
+                    const concerned = filter === 'all' || hasName;
                     item.classList.toggle('dimmed', !concerned);
 
                     allPersons.forEach(p => item.classList.remove('hl-' + p));
-                    if (filter !== 'all' && persons.includes(filter)) {
+                    if (hasName) {
                         item.classList.add('hl-' + filter);
                     }
                 });
+            });
+        });
+
+        const TASKS_STORAGE_KEY = 'sebruno_tasks_checked';
+        const checkedStates = JSON.parse(localStorage.getItem(TASKS_STORAGE_KEY) || '{}');
+
+        document.querySelectorAll('.person-tasklist .todo-item input[type="checkbox"]').forEach(checkbox => {
+            if (checkedStates[checkbox.id]) checkbox.checked = true;
+
+            checkbox.addEventListener('change', () => {
+                checkedStates[checkbox.id] = checkbox.checked;
+                localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(checkedStates));
             });
         });
     </script>
